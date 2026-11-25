@@ -126,3 +126,13 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+import sys
+
+TESTING = "test" in sys.argv
+
+if not TESTING:
+    INSTALLED_APPS = [*INSTALLED_APPS, "debug_toolbar"]
+    MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware", *MIDDLEWARE]
+
+INTERNAL_IPS = ["127.0.0.1"]
